@@ -1,0 +1,33 @@
+<style>
+    .centerScreen {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    :host>>>.mystyle {
+        background-color: rgb(243, 248, 171);
+    }
+</style>
+<div class="container">
+    <div class="centerScreen">
+        <div class="col-sm-3">
+            <p-card header="เข้าสู่ระบบ" [style]="{width: '230px'}" styleClass="p-card-shadow mystyle">
+                <span class="p-float-label">
+                    <input id="float-input" type="text">
+                    <label for="float-input">Username</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <input id="float-input" type="password">
+                    <label for="float-input">password</label>
+                </span>
+                <ng-template pTemplate="footer">
+                    <button pButton type="button" label="submit" class="p-button-success"></button>
+                </ng-template>
+            </p-card>
+            <br>
+        </div>
+    </div>
+</div>
