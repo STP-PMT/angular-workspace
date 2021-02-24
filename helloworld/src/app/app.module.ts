@@ -10,6 +10,11 @@ import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {TabViewModule} from 'primeng/tabview';
+import {DialogModule} from 'primeng/dialog';
+import {ChartModule} from 'primeng/chart';
+import {GMapModule} from 'primeng/gmap';
+import {AvatarModule} from 'primeng/avatar';
+import {AvatarGroupModule} from 'primeng/avatargroup';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import {TabViewModule} from 'primeng/tabview';
     CardModule,
     ButtonModule,
     PanelModule,
-    TabViewModule
+    TabViewModule,
+    DialogModule,
+    ChartModule,
+    GMapModule,
+    AvatarModule,
+    AvatarGroupModule
   ],
   providers: [],
   bootstrap: [AppComponent]
