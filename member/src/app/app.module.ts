@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {AccordionModule} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ToolbarModule } from 'primeng/toolbar';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { Member1Component } from './member1/member1.component';
@@ -24,7 +26,8 @@ import { Member4Component } from './member4/member4.component';
   imports: [
     BrowserModule,
     AccordionModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
