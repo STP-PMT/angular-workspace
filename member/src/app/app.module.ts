@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import {AccordionModule} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToolbarModule } from 'primeng/toolbar';
+import {CardModule} from 'primeng/card';
 
 
 import { HeaderComponent } from './header/header.component';
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ToolbarModule,
     RouterModule,
+    CardModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
