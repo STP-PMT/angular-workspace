@@ -5,8 +5,8 @@
 <ng-template #elseBlock>Other</ng-template>
 
 <ol>
-    <li *ngFor="let item of this.data.cars">
-        <div *ngIf="i==2;else elseBlock">
+    <li *ngFor="let item of this.data.cars let num = index">
+        <div *ngIf="i==num;else elseBlock">
             <span style="color: red;"> {{item.brand}}</span>
         </div>
         <ng-template #elseBlock>

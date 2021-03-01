@@ -9,17 +9,17 @@ import { DataService } from '../data.service';
 })
 export class Member2Component implements OnInit {
   i;
-  constructor(public data : DataService,private router : ActivatedRoute) {
+  constructor(public data: DataService, private router: ActivatedRoute) {
     let idx = router.snapshot.params["index"];
     this.i = idx;
     console.log(data.cars[idx].brand);
-   }
+  }
 
   ngOnInit(): void {
   }
 
-  showCar(){
-    
+  showCar() {
+
   }
 
 }
