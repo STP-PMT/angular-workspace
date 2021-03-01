@@ -1,0 +1,16 @@
+<p>member2 works!</p>
+<a routerLink="/member1">go to page member1</a><br>
+
+<div *ngIf="i==2;else elseBlock">Number 2</div>
+<ng-template #elseBlock>Other</ng-template>
+
+<ol>
+    <li *ngFor="let item of this.data.cars">
+        <div *ngIf="i==2;else elseBlock">
+            <span style="color: red;"> {{item.brand}}</span>
+        </div>
+        <ng-template #elseBlock>
+            <span>{{item.brand}}</span>
+        </ng-template>
+    </li>
+</ol>
