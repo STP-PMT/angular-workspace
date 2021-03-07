@@ -1,8 +1,22 @@
-<div [style]="{'background-color':'#c6427b'}">
-    <hr>
-    <div style="text-align:center;color: white;">
-        This website is developed by Sitthipong Peamootree. <br>
-        Contact:xxx@gmail.com <br>
-        <img src="/assets/Images/source.gif" style="width:1%;">
-    </div><br><br><br><br>
-</div>
+<style>
+    :host>>>p-toolbar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        /* background: #000000;
+      border: 1px solid #dee2e600;
+      padding: 1rem;
+      border-radius: 3px; */
+    }
+</style>
+<p-toolbar [style]="{'background-color':'#c6427b'}">
+    <div class="container">
+        <div [style]="{'background-color':'#c6427b'}">
+            <div style="text-align:center;color: white;">
+                This website is developed by Sitthipong Peamootree. <br>
+                Contact:xxx@gmail.com <br>
+                <img src="/assets/Images/source.gif" style="width:1%;">
+            </div>
+        </div>
+    </div>
+</p-toolbar>
