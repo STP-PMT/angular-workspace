@@ -30,3 +30,8 @@
 :host>>>.p-splitter .p-splitter-gutter .p-splitter-gutter-handle {
     background: #61d195;
 }
+
+:host>>>.p-datatable .p-datatable-thead > tr > th {
+    background: #61d195;
+    color: #282c30;
+}
