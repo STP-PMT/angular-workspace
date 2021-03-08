@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   public table: any;
+  public tableCode:any;
   public selectedTable:any;
   public date: Date;
 
@@ -24,6 +25,8 @@ export class HomeComponent implements OnInit {
       { name: 'โต๊ะ 4', code: 4 }
     ];
     this.selectedTable = this.table.name;
+    console.log(this.selectedTable);
+    
   }
 
   ngOnInit(): void {

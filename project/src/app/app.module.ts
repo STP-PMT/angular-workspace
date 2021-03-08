@@ -8,6 +8,9 @@ import {AccordionModule} from 'primeng/accordion';
 import {FormsModule} from '@angular/forms';
 import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
+import {SplitterModule} from 'primeng/splitter';
+import {TableModule} from 'primeng/table';
+
 
 import { HomeComponent } from './home/home.component';
 
@@ -23,7 +26,9 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     AccordionModule,
     PanelModule,
-    DropdownModule
+    DropdownModule,
+    SplitterModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
