@@ -1,0 +1,7 @@
+<h1>Welcome {{fullname}}</h1>
+<ol>
+    <li *ngFor='let product of this.allproducts'>
+        {{product.productCode}}&nbsp;- &nbsp;{{product.productName}}&nbsp;- &nbsp;{{product.productLine}}
+        <a routerLink="/product/{{product.productCode}}" style="color: red;">Edit</a>
+    </li>
+</ol>

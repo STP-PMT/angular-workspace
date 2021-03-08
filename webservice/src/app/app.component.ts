@@ -9,16 +9,24 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'webservice';
   constructor(private http: HttpClient) { }
-  listuser() {
+  // listuser() {
+  //   console.log("ok");
+  //   let request = this.http.get('http://202.28.34.250/webdev/user')
+  //     .subscribe(reponse => {
+  //       console.log('Response: ' + JSON.stringify(reponse));
+  //     }, error => {
+  //       console.log('Error: ' + JSON.stringify(error));
+  //     });
+  //   console.log("continue");
+  //   // request.unsubscribe();
+  //   console.log("next");
+  // }
+
+  async listuser() {
     console.log("ok");
-    let request = this.http.get('http://202.28.34.250/webdev/user')
-      .subscribe(reponse => {
-        console.log('Response: ' + JSON.stringify(reponse));
-      }, error => {
-        console.log('Error: ' + JSON.stringify(error));
-      });
+    let reponse = await this.http.get('http://202.28.34.250/webdev/user').toPromise();
+    console.log('Response: ' + JSON.stringify(reponse));
     console.log("continue");
-    request.unsubscribe();
     console.log("next");
   }
 }

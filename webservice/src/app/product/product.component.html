@@ -1,0 +1,9 @@
+<p>product works!</p>
+<div *ngIf = "this.product != undefined">
+    <input type="text" name=""  id="" size="50" [(ngModel)]="pName"><br>
+    <input type="text" name=""  id="" size="50"  [(ngModel)]="pLine"><br>
+    <input type="text" name=""  id="" size="50"  [(ngModel)]="pDescription"><br>
+    <input type="text" name=""  id="" size="50"  [(ngModel)]="pInstock"><br>
+    <input type="text" name=""  id="" size="50"  [(ngModel)]="pPrice"><br>
+    <button (click)="saveData()">save</button>
+</div>
