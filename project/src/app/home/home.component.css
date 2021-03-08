@@ -1,0 +1,23 @@
+
+:host>>>.p-panel .p-panel-header {
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+    background: #61d195;
+    color: #495057;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+:host>>>.p-panel-content {
+    background: #bee687;
+}
+
+:host>>>.p-splitter {
+    background: #fff6dd;
+}
+
+:host>>>body {
+    height: 100vh;
+    padding: 0;
+    background: #2b91c5;
+}
