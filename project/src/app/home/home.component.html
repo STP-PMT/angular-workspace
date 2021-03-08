@@ -1,0 +1,27 @@
+<div class="container-fluid" style="width: 1180px;">
+    <div class="container">
+        <p-panel>
+            <ng-template pTemplate="header">
+                <div class="container-fluid">
+                    <div class="row my-auto">
+                        <div class="col-6 my-auto">
+                            <strong>ร้านหมูกะละมัง by คุณแบงค์</strong>
+                        </div>
+                        <div class="col-5 my-auto" style="text-align: right;">
+                            <span>{{ date | date:'d MMMM yyyy HH:mm:ss น.' }}</span>
+                        </div>
+                        <div class="col-1 my-auto" style="text-align: right;">
+                            <button>
+                                button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <div style="text-align: center;">
+                <p-dropdown [options]="table" [(ngModel)]="selectedTable" optionLabel="name"></p-dropdown>
+            </div>
+            
+        </p-panel>
+    </div>
+</div>
