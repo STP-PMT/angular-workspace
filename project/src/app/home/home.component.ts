@@ -5,22 +5,24 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   template: `{{ date }},{{menu}}`
- 
+
 })
 export class HomeComponent implements OnInit {
   public table: any;
-  public tableCode:any;
-  public selectedTable:any;
+  public tableCode: any;
+  public selectedTable: any;
   display: boolean = false;
-  date: Date;
-  data =  {"menu":["เครื่องดื่มไม่อั้น (30 บาท)","ไอศครีมไม่อั้น (50 บาท)","ชุดเล็กอิ่มคุ้ม (59 บาท)","ชุดใหญ่อิ่มแน่น (129 บาท)","บุฟเฟต์เด็ก (109 บาท)","บุฟเฟต์ผู้ใหญ่ (159 บาท)"]};
-  menu:any;
+  date: any;
+  data = { "menu": ["เครื่องดื่มไม่อั้น (30 บาท)", "ไอศครีมไม่อั้น (50 บาท)", "ชุดเล็กอิ่มคุ้ม (59 บาท)", "ชุดใหญ่อิ่มแน่น (129 บาท)", "บุฟเฟต์เด็ก (109 บาท)", "บุฟเฟต์ผู้ใหญ่ (159 บาท)"] };
+  menu: any;
 
   constructor() {
-    
+
     //date time
     setInterval(() => {
-      this.date = new Date()
+      this.date = new Date().toLocaleString('th-TH', {
+        year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
+      })
     }, 1000);
     //table
     this.table = [
@@ -30,18 +32,18 @@ export class HomeComponent implements OnInit {
       { name: 'โต๊ะ 4', code: 4 }
     ];
     this.selectedTable = this.table.name;
-    
-    
+
+
   }
 
   ngOnInit(): void {
   }
 
 
-  showDialog(name:any) {
-      this.display = true;
-      console.log(name);
-      this.menu = name;
+  showDialog(name: any) {
+    this.display = true;
+    console.log(name);
+    this.menu = name;
   }
 
 }
