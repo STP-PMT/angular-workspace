@@ -1,5 +1,5 @@
 <body>
-    <div class="container-fluid" style="width: 1180px;">
+    <div class="container-fluid" style="width: 1180px; padding: 10px;">
         <div class="ng-tns-c11-0 p-panel p-component">
             <p-panel>
                 <ng-template pTemplate="header">
@@ -12,8 +12,8 @@
                                 <span>{{ date | date:'d MMMM yyyy HH:mm:ss น.' }}</span>
                             </div>
                             <div class="col-1 my-auto" style="text-align: right;">
-                                <button routerLink="/report" style="color: #ffffff;" pButton pRipple type="button" icon="pi pi-align-justify"
-                                    class="p-button-rounded p-button-outlined">
+                                <button routerLink="/report" style="color: #ffffff;" pButton pRipple type="button"
+                                    icon="pi pi-align-justify" class="p-button-rounded p-button-outlined">
                                 </button>
                             </div>
                         </div>
@@ -33,34 +33,33 @@
                             <div style="width: 420px;"><br></div>
                             <div class="row" style="text-align: center;">
                                 <div class="col-sm-6">
-                                    <img (click)="showDialog()"src="assets/images/refill.jpg" width="200px" alt="เครื่องดื่มไม่อั้น (30 บาท)">
+                                    <img (click)="showDialog(data.menu[0])" src="assets/images/refill.jpg" width="200px"
+                                        alt="เครื่องดื่มไม่อั้น (30 บาท)">
                                     <br>เครื่องดื่มไม่อั้น (30 บาท)
                                 </div>
                                 <div class="col-sm-6">
-                                    <img _ngcontent-hfe-c41="" src="assets/images/itim.jpeg" width="200px"
-                                        alt="ไอศครีมไม่อั้น (50 บาท)">
+                                    <img (click)="showDialog(data.menu[1])" src="assets/images/itim.jpeg" width="200px" alt="ไอศครีมไม่อั้น (50 บาท)">
                                     <br> ไอศครีมไม่อั้น (50 บาท)
                                 </div>
                             </div>
                             <div class="row" style="text-align: center;">
                                 <div class="col-sm-6">
-                                    <img src="assets/images/small.jpg" width="200px" alt="เครื่องดื่มไม่อั้น (30 บาท)">
+                                    <img (click)="showDialog(data.menu[2])" src="assets/images/small.jpg" width="200px" alt="เครื่องดื่มไม่อั้น (30 บาท)">
                                     <br>ชุดเล็กอิ่มคุ้ม (59 บาท)
                                 </div>
                                 <div class="col-sm-6">
-                                    <img _ngcontent-hfe-c41="" src="assets/images/big.jpg" width="200px"
-                                        alt="ไอศครีมไม่อั้น (50 บาท)">
+                                    <img (click)="showDialog(data.menu[3])" src="assets/images/big.jpg" width="200px" alt="ไอศครีมไม่อั้น (50 บาท)">
                                     <br> ชุดใหญ่อิ่มแน่น (129 บาท)
                                 </div>
                             </div>
                             <div class="row" style="text-align: center;">
                                 <div class="col-sm-6">
-                                    <img src="assets/images/buffet-child.jpg" width="200px" alt="เครื่องดื่มไม่อั้น (30 บาท)">
+                                    <img (click)="showDialog(data.menu[4])" src="assets/images/buffet-child.jpg" width="200px"
+                                        alt="เครื่องดื่มไม่อั้น (30 บาท)">
                                     <br>บุฟเฟต์เด็ก (109 บาท)
                                 </div>
                                 <div class="col-sm-6">
-                                    <img _ngcontent-hfe-c41="" src="assets/images/buffet.jpg" width="200px"
-                                        alt="ไอศครีมไม่อั้น (50 บาท)">
+                                    <img (click)="showDialog(data.menu[5])"src="assets/images/buffet.jpg" width="200px" alt="ไอศครีมไม่อั้น (50 บาท)">
                                     <br> บุฟเฟต์ผู้ใหญ่ (159 บาท)
                                 </div>
                             </div>
@@ -123,12 +122,42 @@
     </div>
 </body>
 
-<p-dialog header="Header" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="เลือกจำนวน" [(visible)]="display" [modal]="true" [style]="{width: '280px'}" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
-    <p class="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
-        </ng-template>
+    <div style="padding-top: 5px; text-align: center;" class="ng-tns-c39-10 ng-star-inserted">
+        <span>
+            <strong _ngcontent-xta-c41="">{{menu}}</strong>
+        </span>
+    </div>
+    <div style="text-align: center;">
+        <div class="row">
+            <div class="col my-auto">
+                <button pbutton="" type="button" icon="pi pi-minus"
+                    class="p-button-rounded p-button p-component p-button-icon-only">
+                    <span class="p-button-icon pi pi-minus" aria-hidden="true">
+                    </span>
+                    <span aria-hidden="true" class="p-button-label">
+                        &amp;nbsp;
+                    </span>
+                </button>
+            </div>
+            <div _ngcontent-xta-c41="" class="col my-auto">
+                <span _ngcontent-xta-c41="" style="font-size: 48px;">1</span>
+            </div>
+            <div _ngcontent-xta-c41="" class="col my-auto">
+                <button _ngcontent-xta-c41="" pbutton="" type="button" icon="pi pi-plus"
+                    class="p-button-rounded p-button p-component p-button-icon-only">
+                    <span class="p-button-icon pi pi-plus" aria-hidden="true"></span><span aria-hidden="true"
+                        class="p-button-label">&amp;nbsp;</span>
+                </button>
+            </div>
+            <div style="text-align: center; padding-top: 20px;" class="container">
+                <button _ngcontent-xta-c41="" pbutton="" type="button" icon="pi pi-check" style="width: 200px;"
+                    class="p-button p-component">
+                    <span class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true"></span>
+                    <span class="p-button-label">เพิ่มรายการ</span>
+                </button>
+            </div>
+        </div>
+    </div>
 </p-dialog>

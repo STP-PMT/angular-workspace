@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  template: `{{ date }}`
+  template: `{{ date }},{{menu}}`
+ 
 })
 export class HomeComponent implements OnInit {
   public table: any;
@@ -12,8 +13,11 @@ export class HomeComponent implements OnInit {
   public selectedTable:any;
   display: boolean = false;
   date: Date;
+  data =  {"menu":["เครื่องดื่มไม่อั้น (30 บาท)","ไอศครีมไม่อั้น (50 บาท)","ชุดเล็กอิ่มคุ้ม (59 บาท)","ชุดใหญ่อิ่มแน่น (129 บาท)","บุฟเฟต์เด็ก (109 บาท)","บุฟเฟต์ผู้ใหญ่ (159 บาท)"]};
+  menu:any;
 
   constructor() {
+    
     //date time
     setInterval(() => {
       this.date = new Date()
@@ -34,8 +38,10 @@ export class HomeComponent implements OnInit {
   }
 
 
-  showDialog() {
+  showDialog(name:any) {
       this.display = true;
+      console.log(name);
+      this.menu = name;
   }
 
 }
