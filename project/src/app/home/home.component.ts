@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
   data = { "menu": ["เครื่องดื่มไม่อั้น (30 บาท)", "ไอศครีมไม่อั้น (50 บาท)", "ชุดเล็กอิ่มคุ้ม (59 บาท)", "ชุดใหญ่อิ่มแน่น (129 บาท)", "บุฟเฟต์เด็ก (109 บาท)", "บุฟเฟต์ผู้ใหญ่ (159 บาท)"] };
   menu: any;
 
-  constructor() {
+  constructor(private http: HttpClient) {
 
     //date time
     setInterval(() => {
@@ -27,15 +28,15 @@ export class HomeComponent implements OnInit {
       })
     }, 1000);
     //table
-    this.table = [
-      { name: 'โต๊ะ 1', code: 1 },
-      { name: 'โต๊ะ 2', code: 2 },
-      { name: 'โต๊ะ 3', code: 3 },
-      { name: 'โต๊ะ 4', code: 4 }
-    ];
-    this.selectedTable = this.table.name;
 
-    
+    console.log("table");
+    let re = this.http.get('http://localhost/Web-Developer/web-service/table')
+      .subscribe((reponse:any) => {
+        this.table = reponse;
+       console.log(reponse);
+      }, error => {
+        console.log('Fail');
+      });
   }
 
   ngOnInit(): void {
