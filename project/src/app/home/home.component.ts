@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
   setMinus() {
     if(this.num!=1){
       this.num-=1;
+      this.temp_num = this.num;
     }
   }
 
