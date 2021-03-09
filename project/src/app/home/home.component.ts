@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   date: any;
   data = { "menu": ["เครื่องดื่มไม่อั้น (30 บาท)", "ไอศครีมไม่อั้น (50 บาท)", "ชุดเล็กอิ่มคุ้ม (59 บาท)", "ชุดใหญ่อิ่มแน่น (129 บาท)", "บุฟเฟต์เด็ก (109 บาท)", "บุฟเฟต์ผู้ใหญ่ (159 บาท)"] };
   menu: any;
+  menu_lsit:any
 
   constructor(private http: HttpClient) {
 
@@ -28,12 +29,18 @@ export class HomeComponent implements OnInit {
       })
     }, 1000);
     //table
-
-    console.log("table");
-    let re = this.http.get('http://localhost/Web-Developer/web-service/table')
+    this.http.get('http://localhost/Web-Developer/web-service/table')
       .subscribe((reponse:any) => {
         this.table = reponse;
        console.log(reponse);
+      }, error => {
+        console.log('Fail');
+      });
+
+      this.http.get('http://localhost/Web-Developer/web-service/menu')
+      .subscribe((reponse:any) => {
+        this.menu_lsit = reponse;
+       console.log(this.menu_lsit);
       }, error => {
         console.log('Fail');
       });
@@ -46,7 +53,7 @@ export class HomeComponent implements OnInit {
   showDialog(name: any) {
     this.display = true;
     console.log(name);
-    this.menu = name;
+    this.menu = this.menu_lsit[name].menuName +" ("+this.menu_lsit[name].menuPrice+") บาท";
    
     if(this.display){
       this.num =1;
