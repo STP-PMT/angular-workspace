@@ -8,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class HomeComponent implements OnInit {
-  public table: any;
-  public tableCode: any;
-  public selectedTable: any;
+  num:number = 1;
+  temp_num:any;
+  table: any;
+  tableCode: any;
+  selectedTable: any;
   display: boolean = false;
-  public date: any;
+  date: any;
   data = { "menu": ["เครื่องดื่มไม่อั้น (30 บาท)", "ไอศครีมไม่อั้น (50 บาท)", "ชุดเล็กอิ่มคุ้ม (59 บาท)", "ชุดใหญ่อิ่มแน่น (129 บาท)", "บุฟเฟต์เด็ก (109 บาท)", "บุฟเฟต์ผู้ใหญ่ (159 บาท)"] };
   menu: any;
 
@@ -33,7 +35,7 @@ export class HomeComponent implements OnInit {
     ];
     this.selectedTable = this.table.name;
 
-
+    
   }
 
   ngOnInit(): void {
@@ -44,6 +46,26 @@ export class HomeComponent implements OnInit {
     this.display = true;
     console.log(name);
     this.menu = name;
+   
+    if(this.display){
+      this.num =1;
+      this.temp_num = this.num;
+    }
   }
 
+  setAdd() {
+    this.num +=1;
+    this.temp_num = this.num;
+  }
+
+  setMinus() {
+    if(this.num!=1){
+      this.num-=1;
+    }
+  }
+
+  save(){
+    console.log(this.temp_num);
+    this.display = false;
+  }
 }
