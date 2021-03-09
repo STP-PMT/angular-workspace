@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   public tableCode: any;
   public selectedTable: any;
   display: boolean = false;
-  date: any;
+  public date: any;
   data = { "menu": ["เครื่องดื่มไม่อั้น (30 บาท)", "ไอศครีมไม่อั้น (50 บาท)", "ชุดเล็กอิ่มคุ้ม (59 บาท)", "ชุดใหญ่อิ่มแน่น (129 บาท)", "บุฟเฟต์เด็ก (109 บาท)", "บุฟเฟต์ผู้ใหญ่ (159 บาท)"] };
   menu: any;
 

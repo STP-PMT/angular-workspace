@@ -10,7 +10,9 @@ export class ReportComponent implements OnInit {
   constructor() {
     //date time
     setInterval(() => {
-      this.date = new Date()
+      this.date = new Date().toLocaleString('th-TH', {
+        year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
+      })
     }, 1000);
   }
 
