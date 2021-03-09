@@ -12,6 +12,7 @@ import {SplitterModule} from 'primeng/splitter';
 import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
 
 import { HomeComponent } from './home/home.component';
 import { ReportComponent } from './report/report.component';
@@ -33,7 +34,8 @@ import { ReportComponent } from './report/report.component';
     SplitterModule,
     TableModule,
     PaginatorModule,
-    ButtonModule
+    ButtonModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

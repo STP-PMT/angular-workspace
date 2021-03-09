@@ -10,7 +10,8 @@ export class HomeComponent implements OnInit {
   public table: any;
   public tableCode:any;
   public selectedTable:any;
-   date: Date;
+  display: boolean = false;
+  date: Date;
 
   constructor() {
     //date time
@@ -25,11 +26,16 @@ export class HomeComponent implements OnInit {
       { name: 'โต๊ะ 4', code: 4 }
     ];
     this.selectedTable = this.table.name;
-    console.log(this.selectedTable);
+    
     
   }
 
   ngOnInit(): void {
+  }
+
+
+  showDialog() {
+      this.display = true;
   }
 
 }
