@@ -1,11 +1,7 @@
 
 :host>>>.p-panel .p-panel-header {
-    border: 1px solid #dee2e6;
-    padding: 1rem;
     background: #61d195;
     color: #282c30;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
 }
 
 :host>>>.p-panel-content {
