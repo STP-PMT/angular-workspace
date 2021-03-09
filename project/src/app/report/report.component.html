@@ -1,0 +1,87 @@
+<body>
+    <div class="container-fluid" style="width: 1180px;">
+        <div class="ng-tns-c11-0 p-panel p-component">
+            <p-panel>
+                <ng-template pTemplate="header">
+                    <div class="container-fluid">
+                        <div class="row my-auto">
+                            <div class="col-6 my-auto">
+                                <strong>ร้านหมูกะละมัง by คุณแบงค์</strong>
+                            </div>
+                            <div class="col-5 my-auto" style="text-align: right;">
+                                <span>{{ date | date:'d MMMM yyyy HH:mm:ss น.' }}</span>
+                            </div>
+                            <div class="col-1 my-auto" style="text-align: right;">
+                                <button routerLink="" style="color: #ffffff;" pButton pRipple type="button" icon="pi pi-home"
+                                class="p-button-rounded p-button-outlined">
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <div style="text-align: center; padding-bottom: 14px; padding-top: 14px;">
+                    <span>รายการใบเสร็จ </span>
+                </div>
+                <p-splitter [style]="{'height': '600px'}">
+                    <ng-template>
+                        <div class="card">
+                            <p-table [value]="products">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="text-align: center; width: 140px;">ใบเสร็จที่</th>
+                                        <th style="text-align: center; width: 100px;">วันที่-เวลา</th>
+                                        <th style="text-align: center; width: 100px;">โต๊ะ</th>
+                                        <th style="text-align: center; width: 100px;">ราคารวม</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-product>
+                                    <tr>
+                                        <td>{{product.code}}</td>
+                                        <td>{{product.name}}</td>
+                                        <td>{{product.category}}</td>
+                                        <td>{{product.quantity}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                            <p-paginator [rows]="10" [totalRecords]="120"></p-paginator>
+                            <div style="width: 553px;"></div>
+                        </div>
+                    </ng-template>
+                    <ng-template>
+                        <div class="card">
+                            <p-table [value]="products">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="text-align: center; width: 140px;">รายการอาหาร</th>
+                                        <th style="text-align: center; width: 100px;">ราคา</th>
+                                        <th style="text-align: center; width: 100px;">จำนวน</th>
+                                        <th style="text-align: center; width: 100px;">รวม</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-product>
+                                    <tr>
+                                        <td>{{product.code}}</td>
+                                        <td>{{product.name}}</td>
+                                        <td>{{product.category}}</td>
+                                        <td>{{product.quantity}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-10"
+                                        style="text-align: right; padding-top: 10px; padding-bottom: 10px;">
+                                        ราคารวมทั้งสิ้น
+                                    </div>
+                                    <div _ngcontent-hfe-c41="" class="col-2"
+                                        style="text-align: center; padding-top: 10px; padding-bottom: 10px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-splitter>
+            </p-panel>
+        </div>
+    </div>
+</body>

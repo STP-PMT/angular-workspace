@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   public table: any;
   public tableCode:any;
   public selectedTable:any;
-  public date: Date;
+   date: Date;
 
   constructor() {
     //date time

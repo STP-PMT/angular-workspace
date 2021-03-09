@@ -1,0 +1,37 @@
+
+:host>>>.p-panel .p-panel-header {
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+    background: #61d195;
+    color: #282c30;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+:host>>>.p-panel-content {
+    background: #bee687;
+}
+
+:host>>>.p-splitter {
+    background: #fff6dd;
+}
+
+:host>>>body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    background: #2b91c5;
+}
+
+:host>>>.p-splitter-gutter{
+    background: #ff88a4;
+}
+
+:host>>>.p-splitter .p-splitter-gutter .p-splitter-gutter-handle {
+    background: #61d195;
+}
+
+:host>>>.p-datatable .p-datatable-thead > tr > th {
+    background: #61d195;
+    color: #282c30;
+}

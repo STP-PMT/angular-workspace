@@ -10,14 +10,17 @@ import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
 import {SplitterModule} from 'primeng/splitter';
 import {TableModule} from 'primeng/table';
-
+import {PaginatorModule} from 'primeng/paginator';
+import {ButtonModule} from 'primeng/button';
 
 import { HomeComponent } from './home/home.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,9 @@ import { HomeComponent } from './home/home.component';
     PanelModule,
     DropdownModule,
     SplitterModule,
-    TableModule
+    TableModule,
+    PaginatorModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
