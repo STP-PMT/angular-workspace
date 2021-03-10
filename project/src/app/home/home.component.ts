@@ -28,6 +28,10 @@ export class HomeComponent implements OnInit {
   selected_order: any;
   btn: boolean = false;
   sum_total: any;
+  isChange: any = false;
+
+  menuID:any;
+  tableID:any;
 
   constructor(private http: HttpClient) {
 
@@ -40,7 +44,7 @@ export class HomeComponent implements OnInit {
     //table
 
     this.showTable(1);
-    
+
   }
 
   async ngOnInit() {
@@ -88,16 +92,33 @@ export class HomeComponent implements OnInit {
   }
 
   save() {
-    console.log(this.temp_num);
+    console.log("nume for save: "+this.temp_num);
     this.display = false;
   }
 
-  showOrderDialog(menuID: any,amount:any) {
+  showOrderDialog(menuID: any, amount: any,tableID:any) {
+    this.menuID = menuID;
+    this.tableID = tableID;
     this.display_order = true;
     console.log(menuID);
     this.menu = this.menu_lsit[menuID - 1].menuName + " (" + this.menu_lsit[menuID - 1].menuPrice + ") บาท";
     this.temp_num = this.manage_order.amount;
-    console.log("amount"+amount);
+    console.log("amount" + amount);
+    this.temp_num = amount;
     this.num = amount;
+  }
+
+  async setUpdateAmount() {
+    let total_sum:any;
+    for(let i of this.menu_lsit){
+      if(i.ID == this.menuID){
+        total_sum = i.menuPrice*this.temp_num;
+      }
+    }
+    let json = {amount:this.temp_num,total:total_sum};
+    await this.http.post('http://localhost/Web-Developer/web-service/order/'+this.menuID+"/"+this.tableID,JSON.stringify(json)).toPromise();
+    this.showTable(this.nTable);
+    this.display_order =false;
+    
   }
 }
