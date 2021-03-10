@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   nTable:any =1;
   order:any;
   selected_order:any;
+  btn:boolean = false;
 
   constructor(private http: HttpClient) {
 
@@ -48,8 +49,14 @@ export class HomeComponent implements OnInit {
     console.log("table"+table_num);
     this.manage_order = await this.http.get('http://localhost/Web-Developer/web-service/order/' + table_num).toPromise();
     this.nTable = table_num;
-    console.log(this.manage_order);
+    console.log("length :"+this.manage_order.length);
     this.order = this.manage_order;
+    if(this.manage_order.length !=0){
+      this.btn = true;
+    }else{
+      this.btn = false;
+    }
+    
 
   }
 
@@ -82,6 +89,7 @@ export class HomeComponent implements OnInit {
   }
 
   showOrderDialog(menuID:any){
+  
     this.display_order = true;
     console.log(menuID);
     this.menu = this.menu_lsit[menuID-1].menuName + " (" + this.menu_lsit[menuID-1].menuPrice + ") บาท";
