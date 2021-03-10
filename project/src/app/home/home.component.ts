@@ -17,15 +17,16 @@ export class HomeComponent implements OnInit {
   tableCode: any;
   selectedTable: any;
   display: boolean = false;
-  display_order:boolean = false;
+  display_order: boolean = false;
   date: any;
   menu: any;
   menu_lsit: any
   manage_order: any;
-  nTable:any =1;
-  order:any;
-  selected_order:any;
-  btn:boolean = false;
+  nTable: any = 1;
+  order: any;
+  selected_order: any;
+  btn: boolean = false;
+  sum_total: any;
 
   constructor(private http: HttpClient) {
 
@@ -38,26 +39,29 @@ export class HomeComponent implements OnInit {
     //table
 
     this.showTable(1);
+    
   }
 
   async ngOnInit() {
     this.table = await this.http.get('http://localhost/Web-Developer/web-service/table').toPromise();
     this.menu_lsit = await this.http.get('http://localhost/Web-Developer/web-service/menu').toPromise();
-    
+
   }
-  async showTable(table_num:any) {
-    console.log("table"+table_num);
+  async showTable(table_num: any) {
+    this.sum_total = 0;
+    console.log("table" + table_num);
     this.manage_order = await this.http.get('http://localhost/Web-Developer/web-service/order/' + table_num).toPromise();
     this.nTable = table_num;
-    console.log("length :"+this.manage_order.length);
     this.order = this.manage_order;
-    if(this.manage_order.length !=0){
+    if (this.manage_order.length != 0) {
       this.btn = true;
-    }else{
+    } else {
       this.btn = false;
     }
-    
 
+    for (let i of this.manage_order) {
+      this.sum_total += i.total;
+    }
   }
 
   showDialog(name: any) {
@@ -88,11 +92,9 @@ export class HomeComponent implements OnInit {
     this.display = false;
   }
 
-  showOrderDialog(menuID:any){
-  
+  showOrderDialog(menuID: any) {
     this.display_order = true;
     console.log(menuID);
-    this.menu = this.menu_lsit[menuID-1].menuName + " (" + this.menu_lsit[menuID-1].menuPrice + ") บาท";
-
+    this.menu = this.menu_lsit[menuID - 1].menuName + " (" + this.menu_lsit[menuID - 1].menuPrice + ") บาท";
   }
 }
