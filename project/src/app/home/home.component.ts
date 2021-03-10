@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,8 @@ export class HomeComponent implements OnInit {
       })
     }, 1000);
     //table
+
+    this.showTable(1);
   }
 
   async ngOnInit() {
@@ -37,12 +40,12 @@ export class HomeComponent implements OnInit {
     this.menu_lsit = await this.http.get('http://localhost/Web-Developer/web-service/menu').toPromise();
     
   }
-  async showTable() {
-    this.manage_order = await this.http.get('http://localhost/Web-Developer/web-service/order/' + this.nTable).toPromise();
-    setInterval(() => {
-      this.nTable = this.selectedTable.ID;
-    }, 1000);
-   
+  async showTable(table_num:any) {
+    console.log("table"+table_num);
+    this.manage_order = await this.http.get('http://localhost/Web-Developer/web-service/order/' + table_num).toPromise();
+    this.nTable = table_num;
+    console.log(this.manage_order);
+
   }
 
   showDialog(name: any) {

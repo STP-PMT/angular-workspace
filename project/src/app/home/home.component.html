@@ -21,7 +21,7 @@
             </ng-template>
             <div style="text-align: center; padding-bottom: 10px;">
                 <span>เลือกโต๊ะ </span>
-                <p-dropdown (click)="showTable()" [options]="table" [(ngModel)]="selectedTable" optionLabel="tableName">
+                <p-dropdown (onChange)="showTable(selectedTable.ID)" [options]="table" [(ngModel)]="selectedTable" optionLabel="tableName">
                 </p-dropdown>
             </div>
             <p-splitter [style]="{'height': '600px'}">
