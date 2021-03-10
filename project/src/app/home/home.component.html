@@ -21,7 +21,8 @@
             </ng-template>
             <div style="text-align: center; padding-bottom: 10px;">
                 <span>เลือกโต๊ะ </span>
-                <p-dropdown (onChange)="showTable(selectedTable.ID)" [options]="table" [(ngModel)]="selectedTable" optionLabel="tableName">
+                <p-dropdown (onChange)="showTable(selectedTable.ID)" [options]="table" [(ngModel)]="selectedTable"
+                    optionLabel="tableName">
                 </p-dropdown>
             </div>
             <p-splitter [style]="{'height': '600px'}">
@@ -76,14 +77,14 @@
                         <div class="container" style="text-align: center;">
                             <br>
                             <div class="row">
-                                <div class="col-12" *ngIf = "nTable != undefined">
+                                <div class="col-12" *ngIf="nTable != undefined">
                                     <strong>จัดการรายการอาหารของโต๊ะ {{nTable}}</strong>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <div class="card">
-                            <p-table [value]="manage_order">
+                            <p-table [value]="manage_order" selectionMode="single" [(selection)]="selected_order">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th style="text-align: center; width: 140px;">รายการอาหาร</th>
@@ -93,12 +94,12 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-product>
-                                    <tr *ngFor="let product of this.manage_order">
-                                        <td style="text-align: center; width: 140px;">{{product.menuName}}</td>
-                                        <td style="text-align: center; width: 100px;">{{product.menuPrice}}</td>
-                                        <td style="text-align: center; width: 100px;">{{product.amount}}</td>
-                                        <td style="text-align: center; width: 100px;">{{product.total}}</td>
-                                    </tr>
+                                        <tr [pSelectableRow]="product" (click) = 'showOrderDialog(product.menuID)'>
+                                            <td style="text-align: center; width: 140px;">{{product.menuName}}</td>
+                                            <td style="text-align: center; width: 100px;">{{product.menuPrice}}</td>
+                                            <td style="text-align: center; width: 100px;">{{product.amount}}</td>
+                                            <td style="text-align: center; width: 100px;">{{product.total}}</td>
+                                        </tr>
                                 </ng-template>
                             </p-table>
                             <div class="container">
@@ -108,7 +109,7 @@
                                         ราคารวมทั้งสิ้น
                                     </div>
                                     <div class="col-2"
-                                        style="text-align: center; padding-top: 10px; padding-bottom: 10px;">0
+                                        style="text-align: center; padding-top: 10px; padding-bottom: 10px; text-align: center;">0
                                     </div>
                                 </div>
                             </div>
@@ -161,6 +162,53 @@
                     class="p-button p-component">
                     <span class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true"></span>
                     <span class="p-button-label">เพิ่มรายการ</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog header="เลือกจำนวน" [(visible)]="display_order" [modal]="true" [style]="{width: '280px'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <div style="padding-top: 5px; text-align: center;" class="ng-tns-c39-10 ng-star-inserted">
+        <span>
+            <strong>{{menu}}</strong>
+        </span>
+    </div>
+    <div style="text-align: center;">
+        <div class="row">
+            <div class="col my-auto">
+                <button (click)="setMinus()" pbutton="" type="button" icon="pi pi-minus"
+                    class="p-button-rounded p-button p-component p-button-icon-only">
+                    <span class="p-button-icon pi pi-minus" aria-hidden="true">
+                    </span>
+                    <span aria-hidden="true" class="p-button-label">
+                        &amp;nbsp;
+                    </span>
+                </button>
+            </div>
+            <div class="col my-auto">
+                <span style="font-size: 48px;">{{num}}</span>
+            </div>
+            <div class="col my-auto">
+                <button (click)="setAdd()" pbutton="" type="button" icon="pi pi-plus"
+                    class="p-button-rounded p-button p-component p-button-icon-only">
+                    <span class="p-button-icon pi pi-plus" aria-hidden="true"></span><span aria-hidden="true"
+                        class="p-button-label">&amp;nbsp;</span>
+                </button>
+            </div>
+            <div style="text-align: center; padding-top: 20px;" class="container">
+                <button (click)="save()" pbutton="" type="button" icon="pi pi-check" style="width: 200px;"
+                    class="p-button p-component">
+                    <span class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true"></span>
+                    <span class="p-button-label">เพิ่มรายการ</span>
+                </button>
+            </div>
+            <div style="text-align: center; padding-top: 20px;" class="container">
+                <button (click)="save()" pbutton="" type="button" label='Danger'icon="pi pi-check" style="width: 200px;"
+                    class="p-button p-button-danger p-component">
+                    <span class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true"></span>
+                    <span class="p-button-label">ลบรายการ</span>
                 </button>
             </div>
         </div>

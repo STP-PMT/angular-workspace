@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ThisReceiver } from '@angular/compiler';
+
+
 
 @Component({
   selector: 'app-home',
@@ -16,11 +17,14 @@ export class HomeComponent implements OnInit {
   tableCode: any;
   selectedTable: any;
   display: boolean = false;
+  display_order:boolean = false;
   date: any;
   menu: any;
   menu_lsit: any
   manage_order: any;
   nTable:any =1;
+  order:any;
+  selected_order:any;
 
   constructor(private http: HttpClient) {
 
@@ -45,6 +49,7 @@ export class HomeComponent implements OnInit {
     this.manage_order = await this.http.get('http://localhost/Web-Developer/web-service/order/' + table_num).toPromise();
     this.nTable = table_num;
     console.log(this.manage_order);
+    this.order = this.manage_order;
 
   }
 
@@ -74,5 +79,12 @@ export class HomeComponent implements OnInit {
   save() {
     console.log(this.temp_num);
     this.display = false;
+  }
+
+  showOrderDialog(menuID:any){
+    this.display_order = true;
+    console.log(menuID);
+    this.menu = this.menu_lsit[menuID-1].menuName + " (" + this.menu_lsit[menuID-1].menuPrice + ") บาท";
+
   }
 }
