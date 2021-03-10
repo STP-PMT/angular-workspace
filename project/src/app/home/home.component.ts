@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -49,7 +50,6 @@ export class HomeComponent implements OnInit {
   }
   async showTable(table_num: any) {
     this.sum_total = 0;
-    console.log("table" + table_num);
     this.manage_order = await this.http.get('http://localhost/Web-Developer/web-service/order/' + table_num).toPromise();
     this.nTable = table_num;
     this.order = this.manage_order;
@@ -92,9 +92,12 @@ export class HomeComponent implements OnInit {
     this.display = false;
   }
 
-  showOrderDialog(menuID: any) {
+  showOrderDialog(menuID: any,amount:any) {
     this.display_order = true;
     console.log(menuID);
     this.menu = this.menu_lsit[menuID - 1].menuName + " (" + this.menu_lsit[menuID - 1].menuPrice + ") บาท";
+    this.temp_num = this.manage_order.amount;
+    console.log("amount"+amount);
+    this.num = amount;
   }
 }
