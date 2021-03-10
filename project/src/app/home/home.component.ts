@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -30,8 +27,9 @@ export class HomeComponent implements OnInit {
   sum_total: any;
   isChange: any = false;
 
-  menuID:any;
-  tableID:any;
+  menuID: any;
+  tableID: any;
+  amount: any;
 
   constructor(private http: HttpClient) {
 
@@ -44,7 +42,6 @@ export class HomeComponent implements OnInit {
     //table
 
     this.showTable(1);
-
   }
 
   async ngOnInit() {
@@ -62,7 +59,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.btn = false;
     }
-
     for (let i of this.manage_order) {
       this.sum_total += i.total;
     }
@@ -92,11 +88,12 @@ export class HomeComponent implements OnInit {
   }
 
   save() {
-    console.log("nume for save: "+this.temp_num);
+    console.log("nume for save: " + this.temp_num);
     this.display = false;
   }
 
-  showOrderDialog(menuID: any, amount: any,tableID:any) {
+  showOrderDialog(menuID: any, amount: any, tableID: any) {
+    this.amount = amount;
     this.menuID = menuID;
     this.tableID = tableID;
     this.display_order = true;
@@ -109,16 +106,19 @@ export class HomeComponent implements OnInit {
   }
 
   async setUpdateAmount() {
-    let total_sum:any;
-    for(let i of this.menu_lsit){
-      if(i.ID == this.menuID){
-        total_sum = i.menuPrice*this.temp_num;
+    if (this.temp_num != this.amount) {
+      let total_sum: any;
+      for (let i of this.menu_lsit) {
+        if (i.ID == this.menuID) {
+          total_sum = i.menuPrice * this.temp_num;
+        }
       }
+      let json = { amount: this.temp_num, total: total_sum };
+      await this.http.post('http://localhost/Web-Developer/web-service/order/' + this.menuID + "/" + this.tableID, JSON.stringify(json)).toPromise();
+      this.showTable(this.nTable);
+      this.display_order = false;
+      console.log('in')
     }
-    let json = {amount:this.temp_num,total:total_sum};
-    await this.http.post('http://localhost/Web-Developer/web-service/order/'+this.menuID+"/"+this.tableID,JSON.stringify(json)).toPromise();
-    this.showTable(this.nTable);
-    this.display_order =false;
-    
+    this.display_order = false;
   }
 }
