@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,11 @@ export class HomeComponent implements OnInit {
   btn: boolean = false;
   sum_total: any;
   isChange: any = false;
+  display_danger: boolean = false;
+
+  set: boolean = false;
+  buff: boolean = false;
+
 
   menuID: any;
   tableID: any;
@@ -60,18 +66,50 @@ export class HomeComponent implements OnInit {
     }
     for (let i of this.manage_order) {
       this.sum_total += i.total;
+      if (i.tableID == this.nTable && i.menuID == 3 || i.menuID == 4) {
+        this.set = true;
+        this.buff = false;
+      } else if (i.tableID == this.nTable && i.menuID == 5 || i.menuID == 6) {
+        this.set = false;
+        this.buff = true;
+      }
     }
+    console.log('set ' + this.set);
+    console.log('buff ' + this.buff)
   }
 
   showDialog(menuID: any) {
-    this.display = true;
-
-    this.menu = this.menu_lsit[menuID].menuName + " (" + this.menu_lsit[menuID].menuPrice + ") บาท";
     this.menuID = this.menu_lsit[menuID].ID;
-    console.log("insert menu id: " + this.menuID);
+    if (this.set) {
+      if (this.menuID == 5 || this.menuID == 6) {
+        this.display_danger = true;
+      } else {
+        this.display = true;
+      }
+    } else if (this.buff) {
+      if (this.menuID == 1 || this.menuID == 2 || this.menuID == 3 || this.menuID == 4) {
+        this.display_danger = true;
+      } else {
+        this.display = true;
+      }
+
+    } else {
+      this.display = true;
+    }
     if (this.display) {
-      this.num = 1;
-      this.temp_num = this.num;
+      console.log("insert menu id: " + this.menuID);
+      console.log(this.manage_order);
+      for (let a of this.manage_order) {
+        if (a.menuID == this.menuID) {
+          this.amount = a.amount;
+        }
+      }
+
+      this.menu = this.menu_lsit[menuID].menuName + " (" + this.menu_lsit[menuID].menuPrice + ") บาท";
+      if (this.display) {
+        this.num = 1;
+        this.temp_num = this.num;
+      }
     }
   }
 
@@ -89,6 +127,7 @@ export class HomeComponent implements OnInit {
 
   async save() {
     let isUpdate: boolean = false;
+    console.log(this.amount);
     if (this.temp_num != this.amount) {
       let total_sum: any = 0;
       for (let i of this.menu_lsit) {
@@ -96,8 +135,8 @@ export class HomeComponent implements OnInit {
           total_sum = i.menuPrice * this.temp_num;
         }
       }
-      for(let o of this.manage_order){
-        if(o.menuID == this.menuID){
+      for (let o of this.manage_order) {
+        if (o.menuID == this.menuID) {
           isUpdate = true;
         }
       }
@@ -107,11 +146,12 @@ export class HomeComponent implements OnInit {
         this.showTable(this.nTable);
         this.display = false;
         console.log('insert to order');
-      }else{
+      } else {
         this.setUpdateAmount();
       }
-      this.display = false;
+
     }
+    this.display = false;
   }
 
   showOrderDialog(menuID: any, amount: any, tableID: any) {
