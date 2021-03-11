@@ -208,7 +208,7 @@
             <div style="text-align: center; padding-top: 20px;" class="container">
                 <button pbutton="" type="button" label='Danger' icon="pi pi-check" style="width: 200px;"
                     class="p-button p-button-danger p-component">
-                    <span class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true"></span>
+                    <span class="p-button-icon p-button-icon-left pi pi-times" aria-hidden="true"></span>
                     <span class="p-button-label">ลบรายการ</span>
                 </button>
             </div>
@@ -221,6 +221,28 @@
     <div style="padding-top: 5px; text-align: center;" class="ng-tns-c39-10 ng-star-inserted">
         <span>
             อาหารแบบแยกชุดสั่งรวมกับแบบบุฟเฟ่ต์ไม่ได้นะ
+        </span>
+    </div>
+    <div style="text-align: center;">
+        <div class="row">
+            <div style="text-align: center; padding-top: 20px;" class="container">
+                <button (click)="setClose()" pbutton="" type="button" icon="pi pi-check" style="width: 200px;"
+                    class="p-button p-component">
+                    <span class="p-button-icon p-button-icon-left pi pi-times" aria-hidden="true"></span>
+                    <span class="p-button-label">ปิดหน้าต่าง</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog header="ยืนยัน" [(visible)]="display_confirm" [modal]="true" [style]="{width: '300px'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <div style="padding-top: 5px; text-align: center;" class="ng-tns-c39-10 ng-star-inserted">
+        <i class="pi pi-exclamation-circle" style="font-size: 2rem"></i>
+        <span>
+            ยืนยันการลบรายการอาหาร?
         </span>
     </div>
     <div style="text-align: center;">

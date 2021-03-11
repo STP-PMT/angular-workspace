@@ -10,13 +10,16 @@ import { ThisReceiver } from '@angular/compiler';
 
 })
 export class HomeComponent implements OnInit {
+  display: boolean = false;
+  display_order: boolean = false;
+  display_danger: boolean = false;
+  display_confirm: boolean = true;
+
   num: number = 1;
   temp_num: any;
   table: any;
   tableCode: any;
   selectedTable: any;
-  display: boolean = false;
-  display_order: boolean = false;
   date: any;
   menu: any;
   menu_lsit: any
@@ -27,7 +30,7 @@ export class HomeComponent implements OnInit {
   btn: boolean = false;
   sum_total: any;
   isChange: any = false;
-  display_danger: boolean = false;
+
 
   set: boolean = false;
   buff: boolean = false;
@@ -182,5 +185,13 @@ export class HomeComponent implements OnInit {
       console.log('in')
     }
     this.display_order = false;
+  }
+
+  setClose() {
+    this.display_danger = false;
+  }
+
+  showDialogDelete(){
+    this.display_confirm = true;
   }
 }
