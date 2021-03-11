@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
       })
     }, 1000);
     //table
-
     this.showTable(1);
   }
 
@@ -64,11 +63,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  showDialog(name: any) {
+  showDialog(menuID: any) {
     this.display = true;
-    console.log(name);
-    this.menu = this.menu_lsit[name].menuName + " (" + this.menu_lsit[name].menuPrice + ") บาท";
 
+    this.menu = this.menu_lsit[menuID].menuName + " (" + this.menu_lsit[menuID].menuPrice + ") บาท";
+    this.menuID = this.menu_lsit[menuID].ID;
+    console.log("insert menu id: " + this.menuID);
     if (this.display) {
       this.num = 1;
       this.temp_num = this.num;
@@ -87,9 +87,31 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  save() {
-    console.log("nume for save: " + this.temp_num);
-    this.display = false;
+  async save() {
+    let isUpdate: boolean = false;
+    if (this.temp_num != this.amount) {
+      let total_sum: any = 0;
+      for (let i of this.menu_lsit) {
+        if (i.ID == this.menuID) {
+          total_sum = i.menuPrice * this.temp_num;
+        }
+      }
+      for(let o of this.manage_order){
+        if(o.menuID == this.menuID){
+          isUpdate = true;
+        }
+      }
+      if (!isUpdate) {
+        let json = { menuID: this.menuID, tableID: this.nTable, amount: this.temp_num, total: total_sum };
+        await this.http.post('http://localhost/Web-Developer/web-service/order', JSON.stringify(json)).toPromise();
+        this.showTable(this.nTable);
+        this.display = false;
+        console.log('insert to order');
+      }else{
+        this.setUpdateAmount();
+      }
+      this.display = false;
+    }
   }
 
   showOrderDialog(menuID: any, amount: any, tableID: any) {
@@ -114,7 +136,7 @@ export class HomeComponent implements OnInit {
         }
       }
       let json = { amount: this.temp_num, total: total_sum };
-      await this.http.post('http://localhost/Web-Developer/web-service/order/' + this.menuID + "/" + this.tableID, JSON.stringify(json)).toPromise();
+      await this.http.post('http://localhost/Web-Developer/web-service/order/' + this.menuID + "/" + this.nTable, JSON.stringify(json)).toPromise();
       this.showTable(this.nTable);
       this.display_order = false;
       console.log('in')
