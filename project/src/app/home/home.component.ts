@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ThisReceiver } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   display: boolean = false;
   display_order: boolean = false;
   display_danger: boolean = false;
-  display_confirm: boolean = true;
+  display_confirm: boolean = false;
 
   num: number = 1;
   temp_num: any;
@@ -193,5 +193,14 @@ export class HomeComponent implements OnInit {
 
   showDialogDelete(){
     this.display_confirm = true;
+  }
+
+  async setDelete(){
+    console.log('menu id : '+this.menuID);
+    console.log('table id :'+this.nTable);
+    await this.http.get('http://localhost/Web-Developer/web-service/order/' + this.menuID + "/" + this.nTable).toPromise();
+    this.showTable(this.nTable);
+    this.display_confirm = false;
+    this.display_order = false;
   }
 }
