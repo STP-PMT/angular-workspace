@@ -117,7 +117,7 @@
                         </div>
                         <div class="row" style="text-align: center;padding-top: 10px;">
                             <div class="col" *ngIf='btn'>
-                                <button style="width: 150px;" pButton type="button" label="ชำระเงิน">
+                                <button  (click) = "showDialogBill()"style="width: 150px;" pButton type="button" label="ชำระเงิน">
                                     <span class="p-button-icon p-button-icon-left pi pi-wallet"></span>
                                 </button>
                             </div>
@@ -262,4 +262,78 @@
             </div>
         </div>
     </div>
+</p-dialog>
+
+<p-dialog header="ยืนยัน" [(visible)]="display_bill" [modal]="true" [style]="{width: '300px'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <div style="padding-top: 5px; text-align: center;" class="ng-tns-c39-10 ng-star-inserted">
+        <i class="pi pi-exclamation-circle" style="font-size: 2rem"></i>
+        <span>
+            ยืนยันการชำระค่าอาหาร?
+        </span>
+    </div>
+    <div style="text-align: center;">
+        <div class="row">
+            <div style="text-align: center; padding-top: 20px;" class="container">
+                <button (click)="setBill()" pbutton="" type="button" icon="pi pi-check" style="width: 100px;"
+                    class="p-button p-component">
+                    <span class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true"></span>
+                    <span class="p-button-label">ตกลง</span>
+                </button>
+                &nbsp;
+                <button (click)="setClose()" pbutton="" type="button" icon="pi pi-check" style="width: 100px;"
+                    class="p-button p-component">
+                    <span class="p-button-icon p-button-icon-left pi pi-times" aria-hidden="true"></span>
+                    <span class="p-button-label">ยกเลิก</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog header="ใบเสร็จเลขที่ {{bill_id}} ค่าอาหารโต๊ะ {{nTable}}" [(visible)]="display_receipt" [modal]="true" [style]="{width: '600px'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <div class="container">
+        <div class="card">
+            <p-table [value]="manage_order" selectionMode="single" [(selection)]="selected_order">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="text-align: center; width: 140px;">รายการอาหาร</th>
+                        <th style="text-align: center; width: 100px;">ราคา</th>
+                        <th style="text-align: center; width: 100px;">จำนวน</th>
+                        <th style="text-align: center; width: 100px;">รวม</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr [pSelectableRow]="product"
+                        (click)='showOrderDialog(product.menuID,product.amount,product.tableID)'>
+                        <td style="text-align: center; width: 140px;">{{product.menuName}}</td>
+                        <td style="text-align: center; width: 100px;">{{product.menuPrice}}</td>
+                        <td style="text-align: center; width: 100px;">{{product.amount}}</td>
+                        <td style="text-align: center; width: 100px;">{{product.total}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <div class="container">
+                <div class="row">
+                    <div class="col-9"
+                        style="text-align: right; padding-top: 10px; padding-bottom: 10px;">
+                        ราคารวมทั้งสิ้น
+                    </div>
+                    <div class="col-3"
+                        style="text-align: center; padding-top: 10px; padding-bottom: 10px; text-align: center;">
+                        {{this.sum_total}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center;padding-top: 10px;">
+            <div class="col" *ngIf='btn'>
+                <button  (click) = "setClose()"style="width: 150px;" pButton type="button" label="ปิดหน้าต่าง">
+                    <span class="p-button-icon p-button-icon-left pi pi-times"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
 </p-dialog>

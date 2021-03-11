@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   display_order: boolean = false;
   display_danger: boolean = false;
   display_confirm: boolean = false;
+  display_bill :boolean = false;
+  display_receipt:boolean = false;
 
   num: number = 1;
   temp_num: any;
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit {
   tableCode: any;
   selectedTable: any;
   date: any;
+  date_data:any;
   menu: any;
   menu_lsit: any
   manage_order: any;
@@ -35,20 +38,17 @@ export class HomeComponent implements OnInit {
   set: boolean = false;
   buff: boolean = false;
 
-
   menuID: any;
   tableID: any;
   amount: any;
+  bill_id:any;
 
   constructor(private http: HttpClient) {
-
-    //date time
     setInterval(() => {
       this.date = new Date().toLocaleString('th-TH', {
         year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
       })
     }, 1000);
-    //table
     this.showTable(1);
   }
 
@@ -189,10 +189,20 @@ export class HomeComponent implements OnInit {
 
   setClose() {
     this.display_danger = false;
+    this.display_bill = false;
+    this.display_receipt = false;
   }
 
   showDialogDelete(){
     this.display_confirm = true;
+  }
+
+  showDialogBill(){
+    this.display_bill = true;
+  }
+
+  showDialogRceipt(){
+    this.display_receipt = true;
   }
 
   async setDelete(){
@@ -202,5 +212,23 @@ export class HomeComponent implements OnInit {
     this.showTable(this.nTable);
     this.display_confirm = false;
     this.display_order = false;
+  }
+
+  async setBill(){
+    let id:any;
+    this.display_bill = false;
+    this.display_receipt = true;
+    this.date_data = this.date+" น.";
+    console.log(this.menuID);
+    console.log(this.nTable);
+    console.log(this.date_data);
+    console.log(this.manage_order);
+    let json = { tableID: this.nTable, date: this.date_data,data:this.manage_order};
+    await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
+    id = await this.http.get('http://localhost/Web-Developer/web-service/receipt').toPromise();
+    for(let i of id){
+      this.bill_id = i;
+    }
+    console.log(this.bill_id);
   }
 }
