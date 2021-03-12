@@ -58,6 +58,8 @@ export class HomeComponent implements OnInit {
 
   }
   async showTable(table_num: any) {
+    this.set = false;
+    this.buff = false;
     this.sum_total = 0;
     this.manage_order = await this.http.get('http://localhost/Web-Developer/web-service/order/' + table_num).toPromise();
     this.nTable = table_num;
@@ -76,6 +78,8 @@ export class HomeComponent implements OnInit {
         this.set = false;
         this.buff = true;
       }
+      
+      
     }
     console.log('set ' + this.set);
     console.log('buff ' + this.buff)
