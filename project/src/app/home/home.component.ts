@@ -191,6 +191,7 @@ export class HomeComponent implements OnInit {
     this.display_danger = false;
     this.display_bill = false;
     this.display_receipt = false;
+    this.showTable(this.nTable);
   }
 
   showDialogDelete(){
@@ -219,16 +220,8 @@ export class HomeComponent implements OnInit {
     this.display_bill = false;
     this.display_receipt = true;
     this.date_data = this.date+" น.";
-    console.log(this.menuID);
-    console.log(this.nTable);
-    console.log(this.date_data);
-    console.log(this.manage_order);
     let json = { tableID: this.nTable, date: this.date_data,data:this.manage_order};
     await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
-    // id = await this.http.get('http://localhost/Web-Developer/web-service/receipt').toPromise();
-    // for(let i of id){
-    //   this.bill_id = i;
-    // }
-    // console.log(this.bill_id);
+    await this.http.get('http://localhost/Web-Developer/web-service/manage/' + this.nTable).toPromise();
   }
 }
