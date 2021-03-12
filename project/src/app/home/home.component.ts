@@ -53,15 +53,15 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.table = await this.http.get('http://localhost/Web-Developer/web-service/table').toPromise();
-    this.menu_lsit = await this.http.get('http://localhost/Web-Developer/web-service/menu').toPromise();
+    this.table = await this.http.get('http://localhost:8080/Web-Developer/web-service/table').toPromise();
+    this.menu_lsit = await this.http.get('http://localhost:8080/Web-Developer/web-service/menu').toPromise();
 
   }
   async showTable(table_num: any) {
     this.set = false;
     this.buff = false;
     this.sum_total = 0;
-    this.manage_order = await this.http.get('http://localhost/Web-Developer/web-service/order/' + table_num).toPromise();
+    this.manage_order = await this.http.get('http://localhost:8080/Web-Developer/web-service/order/' + table_num).toPromise();
     this.nTable = table_num;
     this.order = this.manage_order;
     if (this.manage_order.length != 0) {
@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit {
       }
       if (!isUpdate) {
         let json = { menuID: this.menuID, tableID: this.nTable, amount: this.temp_num, total: total_sum };
-        await this.http.post('http://localhost/Web-Developer/web-service/order', JSON.stringify(json)).toPromise();
+        await this.http.post('http://localhost:8080/Web-Developer/web-service/order', JSON.stringify(json)).toPromise();
         this.showTable(this.nTable);
         this.display = false;
         console.log('insert to order');
@@ -183,7 +183,7 @@ export class HomeComponent implements OnInit {
         }
       }
       let json = { amount: this.temp_num, total: total_sum };
-      await this.http.post('http://localhost/Web-Developer/web-service/order/' + this.menuID + "/" + this.nTable, JSON.stringify(json)).toPromise();
+      await this.http.post('http://localhost:8080/Web-Developer/web-service/order/' + this.menuID + "/" + this.nTable, JSON.stringify(json)).toPromise();
       this.showTable(this.nTable);
       this.display_order = false;
       console.log('in')
@@ -213,7 +213,7 @@ export class HomeComponent implements OnInit {
   async setDelete(){
     console.log('menu id : '+this.menuID);
     console.log('table id :'+this.nTable);
-    await this.http.get('http://localhost/Web-Developer/web-service/order/' + this.menuID + "/" + this.nTable).toPromise();
+    await this.http.get('http://localhost:8080/Web-Developer/web-service/order/' + this.menuID + "/" + this.nTable).toPromise();
     this.showTable(this.nTable);
     this.display_confirm = false;
     this.display_order = false;
@@ -226,7 +226,7 @@ export class HomeComponent implements OnInit {
     this.date_data = this.date+" น.";
     // let json = { tableID: this.nTable, date: this.date_data,data:this.manage_order};
     // await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
-    await this.http.get('http://localhost/Web-Developer/web-service/manage/' + this.nTable).toPromise();
+    await this.http.get('http://localhost:8080/Web-Developer/web-service/manage/' + this.nTable).toPromise();
     // id = await this.http.get('http://localhost/Web-Developer/web-service/receipt/').toPromise();
     // this.bill_id = id;
   }
