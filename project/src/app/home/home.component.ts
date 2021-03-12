@@ -220,8 +220,10 @@ export class HomeComponent implements OnInit {
     this.display_bill = false;
     this.display_receipt = true;
     this.date_data = this.date+" น.";
-    let json = { tableID: this.nTable, date: this.date_data,data:this.manage_order};
-    await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
+    // let json = { tableID: this.nTable, date: this.date_data,data:this.manage_order};
+    // await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
     await this.http.get('http://localhost/Web-Developer/web-service/manage/' + this.nTable).toPromise();
+    // id = await this.http.get('http://localhost/Web-Developer/web-service/receipt/').toPromise();
+    // this.bill_id = id;
   }
 }
