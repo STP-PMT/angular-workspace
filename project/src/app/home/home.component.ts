@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,20 +19,18 @@ export class HomeComponent implements OnInit {
   num: number = 1;
   temp_num: any;
   table: any;
-  tableCode: any;
   selectedTable: any;
   date: any;
   date_data:any;
   menu: any;
   menu_lsit: any
   manage_order: any;
-  nTable: any = 1;
+  table_num: any = 1;
   order: any;
   selected_order: any;
   btn: boolean = false;
   sum_total: any;
   isChange: any = false;
-
 
   set: boolean = false;
   buff: boolean = false;
@@ -62,7 +59,7 @@ export class HomeComponent implements OnInit {
     this.buff = false;
     this.sum_total = 0;
     this.manage_order = await this.http.get('http://localhost:8080/Web-Developer/web-service/order/' + table_num).toPromise();
-    this.nTable = table_num;
+    this.table_num = table_num;
     this.order = this.manage_order;
     if (this.manage_order.length != 0) {
       this.btn = true;
@@ -71,15 +68,13 @@ export class HomeComponent implements OnInit {
     }
     for (let i of this.manage_order) {
       this.sum_total += i.total;
-      if (i.tableID == this.nTable && i.menuID == 3 || i.menuID == 4) {
+      if (i.tableID == this.table_num && i.menuID == 3 || i.menuID == 4) {
         this.set = true;
         this.buff = false;
-      } else if (i.tableID == this.nTable && i.menuID == 5 || i.menuID == 6) {
+      } else if (i.tableID == this.table_num && i.menuID == 5 || i.menuID == 6) {
         this.set = false;
         this.buff = true;
       }
-      
-      
     }
     console.log('set ' + this.set);
     console.log('buff ' + this.buff)
@@ -99,7 +94,6 @@ export class HomeComponent implements OnInit {
       } else {
         this.display = true;
       }
-
     } else {
       this.display = true;
     }
@@ -111,7 +105,6 @@ export class HomeComponent implements OnInit {
           this.amount = a.amount;
         }
       }
-
       this.menu = this.menu_lsit[menuID].menuName + " (" + this.menu_lsit[menuID].menuPrice + ") บาท";
       if (this.display) {
         this.num = 1;
@@ -120,7 +113,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  setAdd() {
+  setPlus() {
     this.num += 1;
     this.temp_num = this.num;
   }
@@ -148,9 +141,9 @@ export class HomeComponent implements OnInit {
         }
       }
       if (!isUpdate) {
-        let json = { menuID: this.menuID, tableID: this.nTable, amount: this.temp_num, total: total_sum };
+        let json = { menuID: this.menuID, tableID: this.table_num, amount: this.temp_num, total: total_sum };
         await this.http.post('http://localhost:8080/Web-Developer/web-service/order', JSON.stringify(json)).toPromise();
-        this.showTable(this.nTable);
+        this.showTable(this.table_num);
         this.display = false;
         console.log('insert to order');
       } else {
@@ -183,8 +176,8 @@ export class HomeComponent implements OnInit {
         }
       }
       let json = { amount: this.temp_num, total: total_sum };
-      await this.http.post('http://localhost:8080/Web-Developer/web-service/order/' + this.menuID + "/" + this.nTable, JSON.stringify(json)).toPromise();
-      this.showTable(this.nTable);
+      await this.http.post('http://localhost:8080/Web-Developer/web-service/order/' + this.menuID + "/" + this.table_num, JSON.stringify(json)).toPromise();
+      this.showTable(this.table_num);
       this.display_order = false;
       console.log('in')
     }
@@ -195,7 +188,7 @@ export class HomeComponent implements OnInit {
     this.display_danger = false;
     this.display_bill = false;
     this.display_receipt = false;
-    this.showTable(this.nTable);
+    this.showTable(this.table_num);
   }
 
   showDialogDelete(){
@@ -212,9 +205,9 @@ export class HomeComponent implements OnInit {
 
   async setDelete(){
     console.log('menu id : '+this.menuID);
-    console.log('table id :'+this.nTable);
-    await this.http.get('http://localhost:8080/Web-Developer/web-service/order/' + this.menuID + "/" + this.nTable).toPromise();
-    this.showTable(this.nTable);
+    console.log('table id :'+this.table_num);
+    await this.http.get('http://localhost:8080/Web-Developer/web-service/order/' + this.menuID + "/" + this.table_num).toPromise();
+    this.showTable(this.table_num);
     this.display_confirm = false;
     this.display_order = false;
   }
@@ -224,9 +217,9 @@ export class HomeComponent implements OnInit {
     this.display_bill = false;
     this.display_receipt = true;
     this.date_data = this.date+" น.";
-    // let json = { tableID: this.nTable, date: this.date_data,data:this.manage_order};
+    // let json = { tableID: this.table_num, date: this.date_data,data:this.manage_order};
     // await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
-    await this.http.get('http://localhost:8080/Web-Developer/web-service/manage/' + this.nTable).toPromise();
+    await this.http.get('http://localhost:8080/Web-Developer/web-service/manage/' + this.table_num).toPromise();
     // id = await this.http.get('http://localhost/Web-Developer/web-service/receipt/').toPromise();
     // this.bill_id = id;
   }
