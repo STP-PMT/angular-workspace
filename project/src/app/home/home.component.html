@@ -292,7 +292,7 @@
     </div>
 </p-dialog>
 
-<p-dialog (onHide)="setClose()" header="ใบเสร็จเลขที่  ค่าอาหารโต๊ะ {{table_num}}" [(visible)]="display_receipt"
+<p-dialog (onHide)="setClose()" header="ใบเสร็จเลขที่ {{bill_id}} ค่าอาหารโต๊ะ {{table_num}}" [(visible)]="display_receipt"
     [modal]="true" [style]="{width: '600px'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
     <div class="container">
         <div class="card">

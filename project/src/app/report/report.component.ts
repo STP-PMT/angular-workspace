@@ -12,6 +12,7 @@ export class ReportComponent implements OnInit {
   receipt_list:any;
   selected_receipt:any;
   receipt_order:any;
+  receipt_sum:any;
   constructor(private http: HttpClient) {
     //date time
     setInterval(() => {
@@ -31,9 +32,8 @@ export class ReportComponent implements OnInit {
   }
 
   async showTable(ID: any) {
-
     this.receipt_order = await this.http.get('http://localhost/Web-Developer/web-service/receipt/' + ID).toPromise();
-    
+    this.receipt_sum =await this.http.get('http://localhost/Web-Developer/web-service/receiptsum/' + ID).toPromise();
   }
 
 }
