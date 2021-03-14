@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
       this.date = new Date().toLocaleString('th-TH', {
         year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
       })
-    }, 1000);
+    });
     this.showTable(1);
   }
 
@@ -68,10 +68,10 @@ export class HomeComponent implements OnInit {
     }
     for (let i of this.manage_order) {
       this.sum_total += i.total;
-      if (i.tableID == this.table_num && i.menuID == 3 || i.menuID == 4) {
+      if (i.groups == 'set') {
         this.set = true;
         this.buff = false;
-      } else if (i.tableID == this.table_num && i.menuID == 5 || i.menuID == 6) {
+      } else if (i.groups == 'buff') {
         this.set = false;
         this.buff = true;
       }
@@ -81,15 +81,17 @@ export class HomeComponent implements OnInit {
   }
 
   showDialog(menuID: any) {
-    this.menuID = this.menu_lsit[menuID].ID;
+    let groups:any;
+    groups = this.menu_lsit[menuID].groups;
+    console.log(groups);
     if (this.set) {
-      if (this.menuID == 5 || this.menuID == 6) {
+      if (groups == "buff") {
         this.display_danger = true;
       } else {
         this.display = true;
       }
     } else if (this.buff) {
-      if (this.menuID == 1 || this.menuID == 2 || this.menuID == 3 || this.menuID == 4) {
+      if (groups == "set") {
         this.display_danger = true;
       } else {
         this.display = true;
@@ -185,6 +187,7 @@ export class HomeComponent implements OnInit {
   }
 
   setClose() {
+    this.display_confirm = false;
     this.display_danger = false;
     this.display_bill = false;
     this.display_receipt = false;
