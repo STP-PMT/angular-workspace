@@ -23,7 +23,7 @@ export class ReportComponent implements OnInit {
   }
 
  async ngOnInit() {
-  this.receipt_list = await this.http.get('http://localhost/Web-Developer/web-service/receipt').toPromise();
+  this.receipt_list = await this.http.get('http://localhost:8080/Web-Developer/web-service/receipt').toPromise();
   console.log("receipt list : "+this.receipt_list);
   }
 
@@ -32,8 +32,8 @@ export class ReportComponent implements OnInit {
   }
 
   async showTable(ID: any) {
-    this.receipt_order = await this.http.get('http://localhost/Web-Developer/web-service/receipt/' + ID).toPromise();
-    this.receipt_sum =await this.http.get('http://localhost/Web-Developer/web-service/receiptsum/' + ID).toPromise();
+    this.receipt_order = await this.http.get('http://localhost:8080/Web-Developer/web-service/receipt/' + ID).toPromise();
+    this.receipt_sum =await this.http.get('http://localhost:8080/Web-Developer/web-service/receiptsum/' + ID).toPromise();
   }
 
 }
