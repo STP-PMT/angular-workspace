@@ -40,6 +40,8 @@ export class HomeComponent implements OnInit {
   amount: any;
   bill_id:any;
 
+  text:any = "เพิ่มรายการ";
+
   constructor(private http: HttpClient) {
     setInterval(() => {
       this.date = new Date().toLocaleString('th-TH', {
@@ -68,10 +70,10 @@ export class HomeComponent implements OnInit {
     }
     for (let i of this.manage_order) {
       this.sum_total += i.total;
-      if (i.groups == 'set') {
+      if (i.groups == "set") {
         this.set = true;
         this.buff = false;
-      } else if (i.groups == 'buff') {
+      } else if (i.groups == "buff") {
         this.set = false;
         this.buff = true;
       }
@@ -82,8 +84,10 @@ export class HomeComponent implements OnInit {
 
   showDialog(menuID: any) {
     let groups:any;
+   
+    this.menuID = this.menu_lsit[menuID].ID;
     groups = this.menu_lsit[menuID].groups;
-    console.log(groups);
+
     if (this.set) {
       if (groups == "buff") {
         this.display_danger = true;
@@ -105,6 +109,9 @@ export class HomeComponent implements OnInit {
       for (let a of this.manage_order) {
         if (a.menuID == this.menuID) {
           this.amount = a.amount;
+          this.text = "ปรับปรุ่งรายการ";
+        }else{
+          this.text = "เพิ่มรายการ";
         }
       }
       this.menu = this.menu_lsit[menuID].menuName + " (" + this.menu_lsit[menuID].menuPrice + ") บาท";
@@ -129,7 +136,7 @@ export class HomeComponent implements OnInit {
 
   async save() {
     let isUpdate: boolean = false;
-    console.log(this.amount);
+    console.log("amount : "+this.amount);
     if (this.temp_num != this.amount) {
       let total_sum: any = 0;
       for (let i of this.menu_lsit) {
@@ -151,9 +158,11 @@ export class HomeComponent implements OnInit {
       } else {
         this.setUpdateAmount();
       }
+   
 
     }
     this.display = false;
+    this.amount= 0;
   }
 
   showOrderDialog(menuID: any, amount: any, tableID: any) {
