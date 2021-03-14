@@ -49,10 +49,10 @@
                     </ng-template>
                     <ng-template>
                         <div class="card">
-                            <p-table [value]="receipt_order">
+                            <p-table [value]="receipt_order" selectionMode="single">
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th style="text-align: center; width: 140px;">รายการอาหาร</th>
+                                        <th style="text-align: center; width: 258px;">รายการอาหาร</th>
                                         <th style="text-align: center; width: 100px;">ราคา</th>
                                         <th style="text-align: center; width: 100px;">จำนวน</th>
                                         <th style="text-align: center; width: 100px;">รวม</th>
@@ -60,7 +60,7 @@
                                 </ng-template>
                                 <ng-template pTemplate="body" let-product>
                                     <tr>
-                                        <td  style="text-align: center; width: 140px;">{{product.menuName}}</td>
+                                        <td  style="text-align: center; width: 258px;">{{product.menuName}}</td>
                                         <td  style="text-align: center; width: 100px;">{{product.menuPrice}}</td>
                                         <td  style="text-align: center; width: 100px;">{{product.amount}}</td>
                                         <td  style="text-align: center; width: 100px;">{{product.total}}</td>
