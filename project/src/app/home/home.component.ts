@@ -13,15 +13,15 @@ export class HomeComponent implements OnInit {
   display_order: boolean = false;
   display_danger: boolean = false;
   display_confirm: boolean = false;
-  display_bill :boolean = false;
-  display_receipt:boolean = false;
+  display_bill: boolean = false;
+  display_receipt: boolean = false;
 
   num: number = 1;
   temp_num: any;
   table: any;
   selectedTable: any;
   date: any;
-  date_data:any;
+  date_data: any;
   menu: any;
   menu_lsit: any
   manage_order: any;
@@ -38,9 +38,9 @@ export class HomeComponent implements OnInit {
   menuID: any;
   tableID: any;
   amount: any;
-  bill_id:any;
+  bill_id: any;
 
-  text:any = "เพิ่มรายการ";
+  text: any = "เพิ่มรายการ";
 
   constructor(private http: HttpClient) {
     setInterval(() => {
@@ -83,10 +83,16 @@ export class HomeComponent implements OnInit {
   }
 
   showDialog(menuID: any) {
-    let groups:any;
+    let groups: any;
     this.menuID = this.menu_lsit[menuID].ID;
     groups = this.menu_lsit[menuID].groups;
-
+    this.text = "เพิ่มรายการ";
+    for (let a of this.manage_order) {
+      if (a.menuID == this.menuID) {
+        this.amount = a.amount;
+        this.text = "ปรับปรุ่งรายการ";
+      }
+    }
     if (this.set) {
       if (groups == "buff") {
         this.display_danger = true;
@@ -111,6 +117,7 @@ export class HomeComponent implements OnInit {
         this.temp_num = this.num;
       }
     }
+    
   }
 
   setPlus() {
@@ -127,14 +134,12 @@ export class HomeComponent implements OnInit {
 
   async save() {
     let isUpdate: boolean = false;
-    console.log("amount : "+this.amount);
-    console.log("temp_num : "+this.temp_num);
+    console.log("amount : " + this.amount);
+    console.log("temp_num : " + this.temp_num);
+    this.amount =0;
     for (let a of this.manage_order) {
       if (a.menuID == this.menuID) {
         this.amount = a.amount;
-        this.text = "ปรับปรุ่งรายการ";
-      }else{
-        this.text = "เพิ่มรายการ";
       }
     }
     if (this.temp_num != this.amount) {
@@ -166,7 +171,6 @@ export class HomeComponent implements OnInit {
     this.menuID = menuID;
     this.tableID = tableID;
     this.display_order = true;
-    console.log(menuID);
     this.menu = this.menu_lsit[menuID - 1].menuName + " (" + this.menu_lsit[menuID - 1].menuPrice + ") บาท";
     this.temp_num = this.manage_order.amount;
     this.temp_num = amount;
@@ -185,7 +189,6 @@ export class HomeComponent implements OnInit {
       await this.http.post('http://localhost/Web-Developer/web-service/order/' + this.menuID + "/" + this.table_num, JSON.stringify(json)).toPromise();
       this.showTable(this.table_num);
       this.display_order = false;
-      console.log('in')
     }
     this.display_order = false;
   }
@@ -198,32 +201,32 @@ export class HomeComponent implements OnInit {
     this.showTable(this.table_num);
   }
 
-  showDialogDelete(){
+  showDialogDelete() {
     this.display_confirm = true;
   }
 
-  showDialogBill(){
+  showDialogBill() {
     this.display_bill = true;
   }
 
-  showDialogRceipt(){
+  showDialogRceipt() {
     this.display_receipt = true;
   }
 
-  async setDelete(){
-    console.log('menu id : '+this.menuID);
-    console.log('table id :'+this.table_num);
+  async setDelete() {
+    console.log('delete menu id : ' + this.menuID);
+    console.log('delete table id :' + this.table_num);
     await this.http.get('http://localhost/Web-Developer/web-service/order/' + this.menuID + "/" + this.table_num).toPromise();
     this.showTable(this.table_num);
     this.display_confirm = false;
     this.display_order = false;
   }
 
-  async setBill(){
-    let id:any;
+  async setBill() {
+    let id: any;
     this.display_bill = false;
     this.display_receipt = true;
-    this.date_data = this.date+" น.";
+    this.date_data = this.date + " น.";
     // let json = { tableID: this.table_num, date: this.date_data,data:this.manage_order};
     // await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
     await this.http.get('http://localhost/Web-Developer/web-service/manage/' + this.table_num).toPromise();
