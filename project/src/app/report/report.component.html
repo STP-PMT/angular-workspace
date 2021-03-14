@@ -25,21 +25,21 @@
                 <p-splitter [style]="{'height': '600px'}">
                     <ng-template>
                         <div class="card">
-                            <p-table [value]="products">
+                            <p-table [value]="receipt_list" selectionMode="single" [(selection)]="selected_receipt">
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th style="text-align: center; width: 140px;">ใบเสร็จที่</th>
-                                        <th style="text-align: center; width: 100px;">วันที่-เวลา</th>
-                                        <th style="text-align: center; width: 100px;">โต๊ะ</th>
-                                        <th style="text-align: center; width: 100px;">ราคารวม</th>
+                                        <th style="text-align: center; width: 100px;">ใบเสร็จที่</th>
+                                        <th style="text-align: center; width: 240px;">วันที่-เวลา</th>
+                                        <th style="text-align: center; width: 70px;">โต๊ะ</th>
+                                        <th style="text-align: center; width: 110px;">ราคารวม</th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-product>
-                                    <tr>
-                                        <td>{{product.code}}</td>
-                                        <td>{{product.name}}</td>
-                                        <td>{{product.category}}</td>
-                                        <td>{{product.quantity}}</td>
+                                    <tr [pSelectableRow]="product" (click) ="showTable(product.ID)">
+                                        <td style="text-align: center; width: 100px;">{{product.ID}}</td>
+                                        <td style="text-align: center; width: 240px;">{{product.date}}</td>
+                                        <td style="text-align: center; width: 70px;">{{product.tableID}}</td>
+                                        <td style="text-align: center; width: 110px;">{{product.quantity}}</td>
                                     </tr>
                                 </ng-template>
                             </p-table>
@@ -49,7 +49,7 @@
                     </ng-template>
                     <ng-template>
                         <div class="card">
-                            <p-table [value]="products">
+                            <p-table [value]="receipt_order">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th style="text-align: center; width: 140px;">รายการอาหาร</th>
@@ -60,10 +60,10 @@
                                 </ng-template>
                                 <ng-template pTemplate="body" let-product>
                                     <tr>
-                                        <td>{{product.code}}</td>
-                                        <td>{{product.name}}</td>
-                                        <td>{{product.category}}</td>
-                                        <td>{{product.quantity}}</td>
+                                        <td  style="text-align: center; width: 140px;">{{product.menuName}}</td>
+                                        <td  style="text-align: center; width: 100px;">{{product.menuPrice}}</td>
+                                        <td  style="text-align: center; width: 100px;">{{product.amount}}</td>
+                                        <td  style="text-align: center; width: 100px;">{{product.quantity}}</td>
                                     </tr>
                                 </ng-template>
                             </p-table>

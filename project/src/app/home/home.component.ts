@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     this.table = await this.http.get('http://localhost/Web-Developer/web-service/table').toPromise();
     this.menu_lsit = await this.http.get('http://localhost/Web-Developer/web-service/menu').toPromise();
-
+    
   }
   async showTable(table_num: any) {
     this.set = false;

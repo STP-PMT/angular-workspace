@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-report',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent implements OnInit {
   date: any;
-  constructor() {
+
+  receipt_list:any;
+  selected_receipt:any;
+  receipt_order:any;
+  constructor(private http: HttpClient) {
     //date time
     setInterval(() => {
       this.date = new Date().toLocaleString('th-TH', {
@@ -16,7 +21,19 @@ export class ReportComponent implements OnInit {
     }, 1000);
   }
 
-  ngOnInit(): void {
+ async ngOnInit() {
+  this.receipt_list = await this.http.get('http://localhost/Web-Developer/web-service/receipt').toPromise();
+  console.log("receipt list : "+this.receipt_list);
+  }
+
+  showOrderDialog(ID:any){
+
+  }
+
+  async showTable(ID: any) {
+
+    this.receipt_order = await this.http.get('http://localhost/Web-Developer/web-service/receipt/' + ID).toPromise();
+    
   }
 
 }
