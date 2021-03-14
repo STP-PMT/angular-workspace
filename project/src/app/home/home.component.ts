@@ -84,7 +84,6 @@ export class HomeComponent implements OnInit {
 
   showDialog(menuID: any) {
     let groups:any;
-   
     this.menuID = this.menu_lsit[menuID].ID;
     groups = this.menu_lsit[menuID].groups;
 
@@ -106,14 +105,6 @@ export class HomeComponent implements OnInit {
     if (this.display) {
       console.log("insert menu id: " + this.menuID);
       console.log(this.manage_order);
-      for (let a of this.manage_order) {
-        if (a.menuID == this.menuID) {
-          this.amount = a.amount;
-          this.text = "ปรับปรุ่งรายการ";
-        }else{
-          this.text = "เพิ่มรายการ";
-        }
-      }
       this.menu = this.menu_lsit[menuID].menuName + " (" + this.menu_lsit[menuID].menuPrice + ") บาท";
       if (this.display) {
         this.num = 1;
@@ -137,6 +128,15 @@ export class HomeComponent implements OnInit {
   async save() {
     let isUpdate: boolean = false;
     console.log("amount : "+this.amount);
+    console.log("temp_num : "+this.temp_num);
+    for (let a of this.manage_order) {
+      if (a.menuID == this.menuID) {
+        this.amount = a.amount;
+        this.text = "ปรับปรุ่งรายการ";
+      }else{
+        this.text = "เพิ่มรายการ";
+      }
+    }
     if (this.temp_num != this.amount) {
       let total_sum: any = 0;
       for (let i of this.menu_lsit) {
@@ -158,22 +158,17 @@ export class HomeComponent implements OnInit {
       } else {
         this.setUpdateAmount();
       }
-   
-
     }
     this.display = false;
-    this.amount= 0;
   }
 
   showOrderDialog(menuID: any, amount: any, tableID: any) {
-    this.amount = amount;
     this.menuID = menuID;
     this.tableID = tableID;
     this.display_order = true;
     console.log(menuID);
     this.menu = this.menu_lsit[menuID - 1].menuName + " (" + this.menu_lsit[menuID - 1].menuPrice + ") บาท";
     this.temp_num = this.manage_order.amount;
-    console.log("amount" + amount);
     this.temp_num = amount;
     this.num = amount;
   }
