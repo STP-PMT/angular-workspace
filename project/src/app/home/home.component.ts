@@ -225,16 +225,16 @@ export class HomeComponent implements OnInit {
   }
 
   async setBill() {
-    let id: any;
-    console.log(this.sum_total);
+    let id: any = 0;
     this.display_bill = false;
     this.display_receipt = true;
-    // this.date_data = formatDate(new Date().toLocaleString('th-TH'));
+    this.date_data =formatDate(new Date(), 'YYYY-MM-dd HH:MM:SS', 'en_US');
     console.log(this.date_data);
-    // let json = { tableID: this.table_num, date: this.date_data,data:this.manage_order,sum:this.sum_total};
-    // await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
-    await this.http.get('http://localhost/Web-Developer/web-service/manage/' + this.table_num).toPromise();
+    let json = { tableID: this.table_num, date: this.date_data,data:this.manage_order,sum:this.sum_total};
+    await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
     id = await this.http.get('http://localhost/Web-Developer/web-service/receiptmax').toPromise();
     this.bill_id = id;
+    await this.http.get('http://localhost/Web-Developer/web-service/manage/' + this.table_num).toPromise();
+
   }
 }
