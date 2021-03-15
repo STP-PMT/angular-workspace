@@ -88,10 +88,12 @@ export class HomeComponent implements OnInit {
     let groups: any;
     this.menuID = this.menu_lsit[menuID].ID;
     groups = this.menu_lsit[menuID].groups;
+    this.num = 1;
     this.text = "เพิ่มรายการ";
     for (let a of this.manage_order) {
       if (a.menuID == this.menuID) {
         this.amount = a.amount;
+        this.num = this.amount;
         this.text = "ปรับปรุ่งรายการ";
       }
     }
@@ -115,7 +117,7 @@ export class HomeComponent implements OnInit {
       console.log(this.manage_order);
       this.menu = this.menu_lsit[menuID].menuName + " (" + this.menu_lsit[menuID].menuPrice + ") บาท";
       if (this.display) {
-        this.num = 1;
+        // this.num = 1;
         this.temp_num = this.num;
       }
     }
