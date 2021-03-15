@@ -37,7 +37,7 @@
                                 <ng-template pTemplate="body" let-product>
                                     <tr [pSelectableRow]="product" (click) ="showTable(product.ID)">
                                         <td style="text-align: center; width: 100px;">{{product.ID}}</td>
-                                        <td style="text-align: center; width: 240px;">{{product.date}}</td>
+                                        <td style="text-align: center; width: 240px;">{{setDate(product.date)}}</td>
                                         <td style="text-align: center; width: 70px;">{{product.tableID}}</td>
                                         <td style="text-align: center; width: 110px;">{{product.sum}}</td>
                                     </tr>

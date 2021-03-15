@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { formatDate } from '@angular/common';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  template: `{{ date }},{{menu}}`
+  template: `{{ date }},{{menu}},{{date_data|date :YYYY-MM-DD HH:MI:SS}}`
 
 })
 export class HomeComponent implements OnInit {
@@ -227,9 +229,10 @@ export class HomeComponent implements OnInit {
     console.log(this.sum_total);
     this.display_bill = false;
     this.display_receipt = true;
-    this.date_data = this.date + " น.";
-    let json = { tableID: this.table_num, date: this.date_data,data:this.manage_order,sum:this.sum_total};
-    await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
+    // this.date_data = formatDate(new Date().toLocaleString('th-TH'));
+    console.log(this.date_data);
+    // let json = { tableID: this.table_num, date: this.date_data,data:this.manage_order,sum:this.sum_total};
+    // await this.http.post('http://localhost/Web-Developer/web-service/receipt', JSON.stringify(json)).toPromise();
     await this.http.get('http://localhost/Web-Developer/web-service/manage/' + this.table_num).toPromise();
     id = await this.http.get('http://localhost/Web-Developer/web-service/receiptmax').toPromise();
     this.bill_id = id;

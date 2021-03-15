@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-report',
@@ -28,12 +29,13 @@ export class ReportComponent implements OnInit {
   this.receipt_length = this.receipt_list.length;
   }
 
-  paginate(event){
-    //  event.first = 
-        event.rows = 8;
-        // event.page = 
-        // event.pageCount = 
+  setDate(date:any){
+    let date_data:any = new Date(date).toLocaleString('th-TH', {
+      year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
+    })
+    return date_data +' น.';
   }
+
 
   async showTable(ID: any) {
     this.receipt_order = await this.http.get('http://localhost/Web-Developer/web-service/receipt/' + ID).toPromise();
