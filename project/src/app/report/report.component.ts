@@ -13,6 +13,7 @@ export class ReportComponent implements OnInit {
   selected_receipt:any;
   receipt_order:any;
   receipt_sum:any;
+  receipt_length:any;
   constructor(private http: HttpClient) {
     //date time
     setInterval(() => {
@@ -24,11 +25,14 @@ export class ReportComponent implements OnInit {
 
  async ngOnInit() {
   this.receipt_list = await this.http.get('http://localhost/Web-Developer/web-service/receipt').toPromise();
-  console.log("receipt list : "+this.receipt_list);
+  this.receipt_length = this.receipt_list.length;
   }
 
-  showOrderDialog(ID:any){
-
+  paginate(event){
+    //  event.first = 
+        event.rows = 8;
+        // event.page = 
+        // event.pageCount = 
   }
 
   async showTable(ID: any) {
